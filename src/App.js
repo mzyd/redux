@@ -1,18 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Button } from 'react-bootstrap'
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      value: 0
+    }
+  }
+  increment() {
+    this.setState({
+      value: this.state.value += 1
+    })
+  }
+  decrement() {
+    this.setState({
+      value: this.state.value -= 1
+    })
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+        <p>
+          { this.state.value }
         </p>
+        <Button bsStyle="primary"
+                onClick={ this.increment.bind(this) }
+        >increment</Button>
+        <Button bsStyle="primary"
+                onClick={ this.decrement.bind(this) }
+        >decrement</Button>
       </div>
     );
   }
