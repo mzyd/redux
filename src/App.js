@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Button } from 'react-bootstrap'
-/* import reducer from './reducers/counter.js'
- * import { createStore } from 'redux' */
 import PropTypes from 'prop-types'
 
-/* const store = createStore(reducer) */
 
 class App extends Component {
   render() {
