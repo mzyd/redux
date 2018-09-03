@@ -7,15 +7,14 @@ import { increment, decrement } from './actions'
 
 class App extends Component {
   render() {
-    const { dispatch } = this.props
+    /* const { dispatch } = this.props */
+    const { increment } = this.props
     return (
       <div className="App">
         <p> {this.props.counter} </p>
         <Button
           bsStyle="primary"
-          onClick= {
-            () => dispatch(increment({name: 'mzy', greeting: 'Hello'}))
-          }
+          onClick={ () => increment('hello') }
         >
           increment
         </Button>
@@ -39,4 +38,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    increment: (name) => { dispatch(increment(name)) }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
