@@ -7,9 +7,9 @@ export const increment = (obj) => {
   }
 }
 
-export const decrement = () => {
+export const decrement = (obj) => {
   return {
-    type: DECREMENT
+    type: DECREMENT,
+    obj,
   }
 }
-

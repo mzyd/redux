@@ -4,22 +4,24 @@ import { Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { increment, decrement } from './actions'
+import { bindActionCreators } from 'redux'
 
 class App extends Component {
   render() {
     /* const { dispatch } = this.props */
-    const { increment } = this.props
+    console.log( "props: ", this.props )
+    const { increment, decrement } = this.props
     return (
       <div className="App">
         <p> {this.props.counter} </p>
         <Button
           bsStyle="primary"
-          onClick={ () => increment('hello') }
-        >
+          onClick={ () => increment('abc') }>
           increment
         </Button>
         <Button
-          bsStyle="primary">
+          bsStyle="primary"
+          onClick={ () => decrement('dddd') }>
           decrement
         </Button>
       </div>
@@ -28,20 +30,29 @@ class App extends Component {
 }
 
 App.propTypes = {
-  counter: PropTypes.number.isRequired
+  counter: PropTypes.number.isRequired,
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => {
-  console.log( "map state: ", state )
   return {
     counter: state.counter
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    increment: (name) => { dispatch(increment(name)) }
-  }
-}
+/* const mapDispatchToProps = (dispatch) => {
+ *   return {
+ *     increment: bindActionCreators(increment, dispatch)
+ *   }
+ * } */
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+/* const mapDispatchToProps = (dispatch) => {
+ *   return bindActionCreators({ increment }, dispatch)
+ * } */
+
+/* export default connect(mapStateToProps, mapDispatchToProps)(App); */
+export default connect(
+  mapStateToProps,
+  { increment, decrement }
+)(App);
