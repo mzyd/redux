@@ -4,27 +4,17 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux'
-import reducer from './reducers/counter.js'
+import rootReducer from './reducers'
 import { increment, decrement } from './actions'
+import { Provider } from 'react-redux'
 
-const store = createStore(reducer)
+const store = createStore(rootReducer)
 
-const render = () => {
-  ReactDOM.render(
-    <App value={ store.getState() }
-         onIncrement={
-           () => store.dispatch(increment())
-         }
-         onDecrement={
-           () => store.dispatch(decrement())
-         }
-    />,
-    document.getElementById('root')
-  );
-}
-
-render()
-
-store.subscribe(render)
+ReactDOM.render(
+  <Provider store={ store }>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
 
 registerServiceWorker();

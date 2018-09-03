@@ -2,21 +2,25 @@ import React, { Component } from 'react';
 import './App.css';
 import { Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
-
+import { connect } from 'react-redux'
+import { increment, decrement } from './actions'
 
 class App extends Component {
   render() {
+    const { dispatch } = this.props
     return (
       <div className="App">
-        <p> { this.props.value } </p>
+        <p> {this.props.counter} </p>
         <Button
           bsStyle="primary"
-          onClick={ this.props.onIncrement }>
+          onClick= {
+            () => dispatch(increment({name: 'mzy', greeting: 'Hello'}))
+          }
+        >
           increment
         </Button>
         <Button
-          bsStyle="primary"
-          onClick={ this.props.onDecrement }>
+          bsStyle="primary">
           decrement
         </Button>
       </div>
@@ -25,9 +29,14 @@ class App extends Component {
 }
 
 App.propTypes = {
-  value: PropTypes.number.isRequired,
-  onIncrement: PropTypes.func.isRequired,
-  onDecrement: PropTypes.func.isRequired,
+  counter: PropTypes.number.isRequired
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  console.log( "map state: ", state )
+  return {
+    counter: state.counter
+  }
+}
+
+export default connect(mapStateToProps)(App);
