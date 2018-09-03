@@ -3,9 +3,9 @@ import './App.css';
 import { Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-/* import { increment, decrement } from './actions' */
 import * as types from './actions'
 import { bindActionCreators } from 'redux'
+import User from './components/User.js'
 
 const mapStateToProps = (state) => {
   return {
@@ -17,7 +17,6 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(types, dispatch)
 }
 
-@testable
 @connect(mapStateToProps, mapDispatchToProps)
 class App extends Component {
 
@@ -26,9 +25,8 @@ class App extends Component {
     increment: PropTypes.func.isRequired,
     decrement: PropTypes.func.isRequired,
   }
+
   render() {
-    /* const { dispatch } = this.props */
-    console.log( "props: ", this.props )
     const { increment, decrement } = this.props
     return (
       <div className="App">
@@ -43,16 +41,12 @@ class App extends Component {
           onClick={ () => decrement('dddd') }>
           decrement
         </Button>
+
+        <User />
       </div>
     );
   }
 }
-
-function testable(target) {
-  target.isTestable = true;
-}
-
-console.log( "-testable-", App.isTestable )
 
 /* const mapDispatchToProps = (dispatch) => {
  *   return {
@@ -62,8 +56,6 @@ console.log( "-testable-", App.isTestable )
 
 // Action 很多的时候使用 bindActionCreators
 
-
-/* export default connect(mapStateToProps, mapDispatchToProps)(App); */
 
 /* export default connect(
  *   mapStateToProps,
